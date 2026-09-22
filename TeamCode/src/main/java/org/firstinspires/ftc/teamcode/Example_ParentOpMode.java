@@ -129,12 +129,12 @@ public class Example_ParentOpMode extends LinearOpMode {
         while (opModeIsActive()) {
 
             // code here should never actually execute in parent opmode.
-            // This function will be be overridden by child opmode classes
+            // This function will be overridden by child opmode classes
 
 
             //include emergency stop check in all runOpMode() functions/methods
             //implementation depends on which E-stop function will be used (boolean/void)
-            if(emergencyStopped()){
+            if(emergencyButtons()){
                 //terminateOpModeNow();   // New method in 2022. (Immediately, Cleanly exits OpMode)
                 break;
             }
@@ -167,35 +167,14 @@ public class Example_ParentOpMode extends LinearOpMode {
     }
 
 
-    public boolean triggerButton(){
-        if((gamepad1.right_trigger>.25)||(gamepad2.right_trigger>.25)){
-            return true;         // Converts analog triggers into digital button presses (booleans)
-        }
-        else{
-            return false;
-        }
-    }
-
-
     /****************************/
     // Emergency Stop Functions
-    // Only one of these is needed.
-    // If using boolean version, call to function will need to be
-    // placed in conditional (if/then) statement with code to break from loop or terminate opmode.
-
-    public boolean emergencyStopped(){
-        if (emergencyButtons()) {
-            //stop all motors, servos, etc.
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    // Must be included in main program loop
 
     public void checkEmergencyStop(){
         if(emergencyButtons()){
             //stop all motors, servos, etc.
+            //
             terminateOpModeNow();   // Force exit of OpMode
         }
     }
@@ -223,16 +202,7 @@ public class Example_ParentOpMode extends LinearOpMode {
     /*****************************/
     //Autonomous Functions
 
-    /*****************************/
-    //Encoder Functions
-   /*
-    public double getLeftVerticalEncoder(){
-        return rightFront.getCurrentPosition();
-    }
-    */
 
-    /*****************************/
-    //Gyro Functions
 
 
 
